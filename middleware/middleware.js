@@ -1,3 +1,5 @@
+const jwt = require('jsonwebtoken');
+
 const isAuthorized = (req, res, next) => {
 	const token = req.headers.authorization;
 	try {
@@ -5,9 +7,7 @@ const isAuthorized = (req, res, next) => {
 		req.userId = decoded.userId;
 		next();
 	} catch (error) {
-		res
-			.status(401)
-			.json({ message: 'Unauthorised access, please add the token' });
+		res.status(401).json({ message: error.message });
 	}
 };
 
