@@ -5,18 +5,18 @@ const bcrypt = require('bcrypt');
 const signupUser = async (req, res) => {
 	try {
 		//check if user exists
-		const user = await User.findOne({ email: req.body.user.email });
+		const user = await User.findOne({ email: req.body.email });
 		if (user) {
 			throw new Error('User Already exists');
 		}
 		//check if username exists
-		const userName = await User.findOne({ userName: req.body.user.userName });
+		const userName = await User.findOne({ userName: req.body.userName });
 		if (userName) {
 			throw new Error('UserName Already exists, try a different username');
 		}
 		//encrypt password and save new user
 		const newUser = new User({
-			...req.body.user,
+			...req.body,
 		});
 		const salt = await bcrypt.genSalt(10);
 		newUser.password = await bcrypt.hash(newUser.password, salt);

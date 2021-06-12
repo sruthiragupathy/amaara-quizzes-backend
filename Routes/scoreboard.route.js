@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.post('/scoreboard', isAuthorized, postScore);
 router.get('/scoreboard', isAuthorized, getQuizOfAUser);
-router.get('/leaderboard', isAuthorized, getTopFiveScores);
+router.get('/leaderboard', getTopFiveScores);
 
 module.exports = router;
